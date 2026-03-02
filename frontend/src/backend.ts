@@ -89,10 +89,281 @@ export class ExternalBlob {
         return this;
     }
 }
-export interface backendInterface {
+export interface Service {
+    title: string;
+    icon: string;
+    description: string;
 }
+export interface Project {
+    title: string;
+    description: string;
+    results: string;
+    category: string;
+    image: string;
+}
+export interface Contact {
+    name: string;
+    email: string;
+    message: string;
+    timestamp: bigint;
+}
+export interface Founder {
+    bio: string;
+    title: string;
+    name: string;
+    photo: string;
+}
+export interface backendInterface {
+    addProject(title: string, description: string, category: string, image: string, results: string): Promise<void>;
+    addService(title: string, description: string, icon: string): Promise<void>;
+    authenticate(password: string): Promise<void>;
+    deleteProject(title: string): Promise<void>;
+    deleteService(title: string): Promise<void>;
+    getAllProjects(): Promise<Array<Project>>;
+    getAllServices(): Promise<Array<Service>>;
+    getContacts(): Promise<Array<Contact>>;
+    getFounder(): Promise<Founder>;
+    getProject(title: string): Promise<Project | null>;
+    getService(title: string): Promise<Service | null>;
+    isAdminAuthenticated(): Promise<boolean>;
+    submitContact(name: string, email: string, message: string): Promise<void>;
+    updateFounder(name: string, title: string, bio: string, photo: string): Promise<void>;
+    updateProject(title: string, description: string, category: string, image: string, results: string): Promise<void>;
+    updateService(title: string, description: string, icon: string): Promise<void>;
+}
+import type { Project as _Project, Service as _Service } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async addProject(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addProject(arg0, arg1, arg2, arg3, arg4);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addProject(arg0, arg1, arg2, arg3, arg4);
+            return result;
+        }
+    }
+    async addService(arg0: string, arg1: string, arg2: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addService(arg0, arg1, arg2);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addService(arg0, arg1, arg2);
+            return result;
+        }
+    }
+    async authenticate(arg0: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.authenticate(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.authenticate(arg0);
+            return result;
+        }
+    }
+    async deleteProject(arg0: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteProject(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteProject(arg0);
+            return result;
+        }
+    }
+    async deleteService(arg0: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteService(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteService(arg0);
+            return result;
+        }
+    }
+    async getAllProjects(): Promise<Array<Project>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllProjects();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllProjects();
+            return result;
+        }
+    }
+    async getAllServices(): Promise<Array<Service>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllServices();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllServices();
+            return result;
+        }
+    }
+    async getContacts(): Promise<Array<Contact>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getContacts();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getContacts();
+            return result;
+        }
+    }
+    async getFounder(): Promise<Founder> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getFounder();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getFounder();
+            return result;
+        }
+    }
+    async getProject(arg0: string): Promise<Project | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getProject(arg0);
+                return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getProject(arg0);
+            return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getService(arg0: string): Promise<Service | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getService(arg0);
+                return from_candid_opt_n2(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getService(arg0);
+            return from_candid_opt_n2(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async isAdminAuthenticated(): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.isAdminAuthenticated();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.isAdminAuthenticated();
+            return result;
+        }
+    }
+    async submitContact(arg0: string, arg1: string, arg2: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.submitContact(arg0, arg1, arg2);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.submitContact(arg0, arg1, arg2);
+            return result;
+        }
+    }
+    async updateFounder(arg0: string, arg1: string, arg2: string, arg3: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateFounder(arg0, arg1, arg2, arg3);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateFounder(arg0, arg1, arg2, arg3);
+            return result;
+        }
+    }
+    async updateProject(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateProject(arg0, arg1, arg2, arg3, arg4);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateProject(arg0, arg1, arg2, arg3, arg4);
+            return result;
+        }
+    }
+    async updateService(arg0: string, arg1: string, arg2: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateService(arg0, arg1, arg2);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateService(arg0, arg1, arg2);
+            return result;
+        }
+    }
+}
+function from_candid_opt_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_Project]): Project | null {
+    return value.length === 0 ? null : value[0];
+}
+function from_candid_opt_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_Service]): Service | null {
+    return value.length === 0 ? null : value[0];
 }
 export interface CreateActorOptions {
     agent?: Agent;

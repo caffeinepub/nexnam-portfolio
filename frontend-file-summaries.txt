@@ -1,0 +1,19 @@
+{
+  "frontend/src/index.css": "Global styles with OKLCH color system, Inter and Syne font imports, CSS variables for light/dark modes, and utility classes for gradients and glass effects.",
+  "frontend/tailwind.config.js": "Tailwind configuration with custom fonts (Inter, Syne), OKLCH color tokens mapped to CSS variables, border radius, and animation keyframes.",
+  "frontend/src/hooks/useAuth.ts": "Authentication hook managing admin login state with localStorage persistence, calling backend authenticate/isAdminAuthenticated methods.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including founder, projects, services, contacts CRUD with cache invalidation.",
+  "frontend/src/components/ProtectedRoute.tsx": "Route guard component that renders AdminLogin if not authenticated, otherwise renders children.",
+  "frontend/src/pages/AdminLogin.tsx": "Admin login page with password form, error handling, and link back to the public site.",
+  "frontend/src/components/admin/FounderEditor.tsx": "Form component for editing founder name, title, bio, and photo URL with live preview and backend sync.",
+  "frontend/src/components/admin/ProjectsManager.tsx": "Full CRUD manager for portfolio projects with inline add/edit forms and delete confirmation.",
+  "frontend/src/components/admin/ServicesManager.tsx": "Full CRUD manager for services with inline add/edit forms, icon support, and delete confirmation.",
+  "frontend/src/components/admin/ContactSubmissions.tsx": "Read-only viewer for contact form submissions sorted by timestamp with formatted dates.",
+  "frontend/src/pages/AdminDashboard.tsx": "Admin dashboard layout with responsive sidebar navigation, section switching, and logout functionality.",
+  "frontend/src/App.tsx": "Main app component with QueryClientProvider, path-based routing between public site and admin panel, and footer with attribution.",
+  "frontend/src/components/HeroSection.tsx": "Hero section with background image, logo, headline, and CTA buttons linking to services and contact sections.",
+  "frontend/src/components/ServicesSection.tsx": "Services section fetching data from backend via useServicesQuery, with loading skeletons and empty state.",
+  "frontend/src/components/PortfolioSection.tsx": "Portfolio section fetching projects from backend via useProjectsQuery, displaying cards with images, badges, and results.",
+  "frontend/src/components/TeamSection.tsx": "Team/founder section fetching founder data from backend, displaying photo, name, title, and bio with fallback image.",
+  "frontend/src/components/CTASection.tsx": "Contact section with info cards and a form that submits to the backend via useSubmitContact, with success state."
+}

@@ -8,10 +8,116 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
-export const idlService = IDL.Service({});
+export const Project = IDL.Record({
+  'title' : IDL.Text,
+  'description' : IDL.Text,
+  'results' : IDL.Text,
+  'category' : IDL.Text,
+  'image' : IDL.Text,
+});
+export const Service = IDL.Record({
+  'title' : IDL.Text,
+  'icon' : IDL.Text,
+  'description' : IDL.Text,
+});
+export const Contact = IDL.Record({
+  'name' : IDL.Text,
+  'email' : IDL.Text,
+  'message' : IDL.Text,
+  'timestamp' : IDL.Int,
+});
+export const Founder = IDL.Record({
+  'bio' : IDL.Text,
+  'title' : IDL.Text,
+  'name' : IDL.Text,
+  'photo' : IDL.Text,
+});
+
+export const idlService = IDL.Service({
+  'addProject' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+      [],
+      [],
+    ),
+  'addService' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
+  'authenticate' : IDL.Func([IDL.Text], [], []),
+  'deleteProject' : IDL.Func([IDL.Text], [], []),
+  'deleteService' : IDL.Func([IDL.Text], [], []),
+  'getAllProjects' : IDL.Func([], [IDL.Vec(Project)], ['query']),
+  'getAllServices' : IDL.Func([], [IDL.Vec(Service)], ['query']),
+  'getContacts' : IDL.Func([], [IDL.Vec(Contact)], ['query']),
+  'getFounder' : IDL.Func([], [Founder], ['query']),
+  'getProject' : IDL.Func([IDL.Text], [IDL.Opt(Project)], ['query']),
+  'getService' : IDL.Func([IDL.Text], [IDL.Opt(Service)], ['query']),
+  'isAdminAuthenticated' : IDL.Func([], [IDL.Bool], ['query']),
+  'submitContact' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
+  'updateFounder' : IDL.Func([IDL.Text, IDL.Text, IDL.Text, IDL.Text], [], []),
+  'updateProject' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+      [],
+      [],
+    ),
+  'updateService' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
+});
 
 export const idlInitArgs = [];
 
-export const idlFactory = ({ IDL }) => { return IDL.Service({}); };
+export const idlFactory = ({ IDL }) => {
+  const Project = IDL.Record({
+    'title' : IDL.Text,
+    'description' : IDL.Text,
+    'results' : IDL.Text,
+    'category' : IDL.Text,
+    'image' : IDL.Text,
+  });
+  const Service = IDL.Record({
+    'title' : IDL.Text,
+    'icon' : IDL.Text,
+    'description' : IDL.Text,
+  });
+  const Contact = IDL.Record({
+    'name' : IDL.Text,
+    'email' : IDL.Text,
+    'message' : IDL.Text,
+    'timestamp' : IDL.Int,
+  });
+  const Founder = IDL.Record({
+    'bio' : IDL.Text,
+    'title' : IDL.Text,
+    'name' : IDL.Text,
+    'photo' : IDL.Text,
+  });
+  
+  return IDL.Service({
+    'addProject' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [],
+        [],
+      ),
+    'addService' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
+    'authenticate' : IDL.Func([IDL.Text], [], []),
+    'deleteProject' : IDL.Func([IDL.Text], [], []),
+    'deleteService' : IDL.Func([IDL.Text], [], []),
+    'getAllProjects' : IDL.Func([], [IDL.Vec(Project)], ['query']),
+    'getAllServices' : IDL.Func([], [IDL.Vec(Service)], ['query']),
+    'getContacts' : IDL.Func([], [IDL.Vec(Contact)], ['query']),
+    'getFounder' : IDL.Func([], [Founder], ['query']),
+    'getProject' : IDL.Func([IDL.Text], [IDL.Opt(Project)], ['query']),
+    'getService' : IDL.Func([IDL.Text], [IDL.Opt(Service)], ['query']),
+    'isAdminAuthenticated' : IDL.Func([], [IDL.Bool], ['query']),
+    'submitContact' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
+    'updateFounder' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [],
+        [],
+      ),
+    'updateProject' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [],
+        [],
+      ),
+    'updateService' : IDL.Func([IDL.Text, IDL.Text, IDL.Text], [], []),
+  });
+};
 
 export const init = ({ IDL }) => { return []; };

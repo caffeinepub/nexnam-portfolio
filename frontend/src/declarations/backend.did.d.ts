@@ -10,7 +10,54 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
-export interface _SERVICE {}
+export interface Contact {
+  'name' : string,
+  'email' : string,
+  'message' : string,
+  'timestamp' : bigint,
+}
+export interface Founder {
+  'bio' : string,
+  'title' : string,
+  'name' : string,
+  'photo' : string,
+}
+export interface Project {
+  'title' : string,
+  'description' : string,
+  'results' : string,
+  'category' : string,
+  'image' : string,
+}
+export interface Service {
+  'title' : string,
+  'icon' : string,
+  'description' : string,
+}
+export interface _SERVICE {
+  'addProject' : ActorMethod<
+    [string, string, string, string, string],
+    undefined
+  >,
+  'addService' : ActorMethod<[string, string, string], undefined>,
+  'authenticate' : ActorMethod<[string], undefined>,
+  'deleteProject' : ActorMethod<[string], undefined>,
+  'deleteService' : ActorMethod<[string], undefined>,
+  'getAllProjects' : ActorMethod<[], Array<Project>>,
+  'getAllServices' : ActorMethod<[], Array<Service>>,
+  'getContacts' : ActorMethod<[], Array<Contact>>,
+  'getFounder' : ActorMethod<[], Founder>,
+  'getProject' : ActorMethod<[string], [] | [Project]>,
+  'getService' : ActorMethod<[string], [] | [Service]>,
+  'isAdminAuthenticated' : ActorMethod<[], boolean>,
+  'submitContact' : ActorMethod<[string, string, string], undefined>,
+  'updateFounder' : ActorMethod<[string, string, string, string], undefined>,
+  'updateProject' : ActorMethod<
+    [string, string, string, string, string],
+    undefined
+  >,
+  'updateService' : ActorMethod<[string, string, string], undefined>,
+}
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];
 export declare const idlFactory: IDL.InterfaceFactory;

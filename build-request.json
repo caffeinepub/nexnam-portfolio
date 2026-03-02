@@ -1,348 +1,79 @@
 {
   "kind": "build_request",
-  "title": "NexNam — Futuristic Animated 3D Portfolio Website",
+  "title": "Add Integrated Admin Panel for Site Content Management",
   "projectName": "NexNam Portfolio",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Set up the global design system: background #050510, primary #6C63FF, secondary #00D4FF, accent #FF6B6B, text #FFFFFF/#B0B8D0. Configure Tailwind with dark mode, custom color tokens, and CSS custom properties. Use Inter for body text and Space Grotesk for headings. Apply smooth scroll behavior globally and ensure all sections have id attributes for anchor navigation.",
-      "target": "frontend",
+      "text": "Create a backend actor with persistent storage for all manageable site content: founder info (name, title, bio, photo URL), portfolio projects (title, description, category, image, results), services (title, description, icon), and contact form submissions (name, email, message, timestamp). Expose update and query functions for each entity, and a simple admin authentication check using a hardcoded password ('Nikhil@123').",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Design System",
-          "Background: #050510",
-          "Font: Inter for body, Syne or Space Grotesk for headings"
+          "msg-recent"
         ]
       },
       "acceptanceCriteria": [
-        "Tailwind config includes custom color tokens matching the design system palette",
-        "CSS custom properties defined for all brand colors",
-        "Space Grotesk applied to all headings, Inter to body text",
-        "smooth scroll-behavior enabled globally",
-        "All sections have matching id attributes (about, services, work, team, process, contact)"
+        "Backend stores founder, project, service, and contact submission data in stable variables.",
+        "Query functions return current data for all entities.",
+        "Update functions persist changes for founder info, projects, and services.",
+        "Admin login function validates against the hardcoded password and returns a success/failure flag.",
+        "Contact submissions can be read from the admin panel."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Build a fixed glassmorphism navbar with: NexNam logo using gradient text (primary→secondary), nav links (About, Services, Work, Team, Process, Contact) as anchor links, a 'Start Project' CTA button with violet glow effect, and a mobile hamburger menu that opens a full-screen or slide-in mobile nav. Use backdrop-blur and semi-transparent background for the glassmorphism effect.",
+      "text": "Add a React-based admin panel accessible at the '/admin' route within the existing single-page app. The panel must include a login screen (username: admin, password: Nikhil@123) that gates access to the dashboard. The dashboard must have sections for: (1) editing founder info including photo URL upload, (2) managing portfolio projects (add/edit/delete), (3) managing services (add/edit/delete), and (4) viewing contact form submissions. All changes must call the backend actor methods and reflect immediately on the public-facing site.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Fixed glassmorphism navbar",
-          "Logo: 'NexNam' with gradient text",
-          "CTA button: 'Start Project' with glow",
-          "Mobile hamburger menu"
+          "msg-recent"
         ]
       },
       "acceptanceCriteria": [
-        "Navbar is fixed at top and visible across all scroll positions",
-        "NexNam logo text renders with gradient from #6C63FF to #00D4FF",
-        "All nav links scroll smoothly to their respective sections",
-        "'Start Project' button has a visible violet glow box-shadow",
-        "Hamburger icon appears on mobile and toggles a mobile nav menu",
-        "Navbar has backdrop-blur glassmorphism styling"
+        "Navigating to /admin shows a login form.",
+        "Incorrect credentials show an error message; correct credentials grant access to the dashboard.",
+        "Dashboard has clearly labeled tabs or sidebar sections: Founder, Projects, Services, Contact Submissions.",
+        "Founder section allows editing name, title, bio, and photo URL; save updates the backend.",
+        "Projects section lists all projects with edit and delete buttons; add new project form is present.",
+        "Services section lists all services with edit and delete buttons; add new service form is present.",
+        "Contact Submissions section lists all received messages with sender name, email, message, and timestamp.",
+        "Public-facing sections (TeamSection, PortfolioSection, ServicesSection) read data from the backend and reflect admin changes."
       ]
     },
     {
       "id": "REQ-3",
-      "text": "Build a full-viewport hero section with: headline 'We Build Future-Ready Web Applications', subheadline 'Empowering startups with scalable, AI-driven digital products.', two CTA buttons ('Start Your Project' filled + 'View Our Work' outlined), a scroll indicator arrow at the bottom, and Framer Motion staggered entrance animations for text elements. The background must feature a React Three Fiber canvas with an animated wireframe icosahedron sphere that slowly rotates and floating particle field.",
+      "text": "Update the public-facing TeamSection, PortfolioSection, ServicesSection, and CTASection components to fetch their content from the backend actor instead of using hardcoded static data, so that admin panel changes are reflected live on the website.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Full viewport height",
-          "Headline: 'We Build Future-Ready Web Applications'",
-          "Background: React Three Fiber canvas with animated 3D rotating geometric sphere made of wireframe icosahedron + floating particles",
-          "Text entrance animations with Framer Motion (stagger children)",
-          "Scroll indicator arrow"
+          "msg-recent"
         ]
       },
       "acceptanceCriteria": [
-        "Section fills 100vh",
-        "Headline and subheadline render with correct copy",
-        "Both CTA buttons are present — one filled with gradient, one outlined",
-        "Three.js canvas renders an animated rotating wireframe icosahedron with floating particles",
-        "Text elements animate in with staggered Framer Motion transitions",
-        "Scroll indicator arrow is visible at the bottom of the section"
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Build an About NexNam section with: a left column containing company story text (who we are, what we build, why we build it), a right column with four animated counter stats (50+ projects, 30+ clients, 3+ years, 100% satisfaction) that count up on scroll into view. Below, render three glassmorphism cards for Mission, Vision, and Core Values. Below those, render an animated horizontal timeline showing company growth milestones: 2022 → 2023 → 2024 → 2025, with each milestone revealed via Framer Motion scroll-triggered animation.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "About NexNam",
-          "Animated stats (50+ projects, 30+ clients, 3+ years, 100% satisfaction)",
-          "Three cards — Mission, Vision, Core Values with glassmorphism",
-          "Animated timeline showing company growth journey (2022 → 2023 → 2024 → 2025)"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Left column has story text; right column has 4 stat counters that animate on scroll",
-        "Three glassmorphism cards render for Mission, Vision, Core Values",
-        "Timeline shows 4 milestones from 2022 to 2025",
-        "Timeline and stat animations trigger when the section scrolls into view"
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Build a Services section with headline 'What We Build' and five 3D tilt cards using react-parallax-tilt. Each card must have glassmorphism styling, a gradient border on hover, and a glow effect. Services: (1) Custom Web Application Development, (2) SaaS Product Development, (3) UI/UX Design, (4) AI Integration, (5) Performance & Optimization. Each card includes an SVG or emoji icon, title, and description.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "3D tilt cards using react-parallax-tilt",
-          "glassmorphism, gradient border on hover",
-          "Custom Web Application Development",
-          "SaaS Product Development",
-          "UI/UX Design",
-          "AI Integration",
-          "Performance & Optimization"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Headline 'What We Build' is displayed",
-        "Five service cards render with correct titles and descriptions",
-        "Cards tilt on mouse hover via react-parallax-tilt",
-        "Each card has glassmorphism background and a gradient border visible on hover",
-        "Glow effect activates on hover"
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "text": "Build a Portfolio / Case Studies section with headline 'Our Work' and 3–4 project cards. Each card must display: a CSS 3D device mockup (laptop frame with screenshot placeholder area), project name, technology tags, a brief Problem/Solution/Result summary, a hover lift + glow effect, and an 'Explore Case Study' CTA button. Projects: FinTech Dashboard, AI SaaS Platform, E-commerce Web App, Healthcare Portal.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "CSS 3D device mockups (laptop frame with screenshot area)",
-          "Project name, tags",
-          "Problem / Solution / Result brief",
-          "Hover: lift + glow effect",
-          "'Explore Case Study' CTA button",
-          "FinTech Dashboard, AI SaaS Platform, E-commerce Web App, Healthcare Portal"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Section headline 'Our Work' is displayed",
-        "Four project cards render with correct project names and tags",
-        "Each card includes a CSS device mockup frame",
-        "Problem/Solution/Result brief text is present on each card",
-        "Hover state applies lift transform and glow box-shadow",
-        "'Explore Case Study' button is present on each card"
-      ]
-    },
-    {
-      "id": "REQ-7",
-      "text": "Build a Founder & Co-Founder section with a premium centered layout. Two cards side by side: (1) Alex Morgan — CEO & Founder, (2) Sarah Chen — CTO & Co-Founder. Each card has a gradient avatar circle with initials, name, role, a short bio, and a LinkedIn icon placeholder link. Include a centered italic vision quote with stylized quotation marks. Apply a radial gradient glow behind both cards as a decorative background layer.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Founder & Co-Founder",
-          "Image placeholder: gradient avatar circle with initials",
-          "Alex Morgan — CEO & Founder",
-          "Sarah Chen — CTO & Co-Founder",
-          "Vision quote in italic with quote marks",
-          "LinkedIn icon placeholder",
-          "Background: radial gradient glow behind cards"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Two team cards render side by side (stacked on mobile)",
-        "Each card shows gradient avatar circle with initials, name, title, and bio",
-        "LinkedIn icon is present as a placeholder anchor on each card",
-        "Italic vision quote with decorative quotation marks is displayed",
-        "Radial gradient glow is visible behind the cards"
-      ]
-    },
-    {
-      "id": "REQ-8",
-      "text": "Build a Technology Stack section with headline 'Powered By Modern Technology'. Render an animated floating grid of technology name badges/icons with CSS up-down float animations and staggered delays. Technologies to include: React, Next.js, Node.js, TypeScript, PostgreSQL, MongoDB, AWS, Docker, OpenAI, Stripe, Tailwind, GraphQL, Redis, Kubernetes, Webflow. Apply a subtle grid-lines background pattern to the section.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Animated floating grid of tech logos/icons",
-          "CSS animation: floating up-down with stagger delays",
-          "React, Next.js, Node.js, TypeScript, PostgreSQL, MongoDB, AWS, Docker, OpenAI, Stripe, Tailwind, GraphQL, Redis, Kubernetes, Webflow",
-          "Subtle grid lines background"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Headline 'Powered By Modern Technology' is displayed",
-        "All 15 listed technologies appear as styled badges or icon tiles",
-        "Each badge has a continuous floating up-down CSS animation",
-        "Staggered animation delays create a wave-like floating effect",
-        "Section background has a visible subtle grid line pattern"
-      ]
-    },
-    {
-      "id": "REQ-9",
-      "text": "Build a Testimonials section with headline 'What Our Clients Say'. Implement an Embla Carousel with auto-scroll. Include 4–5 testimonial cards, each with: a colored avatar circle placeholder, a quote text, client name/company/role, a 5-star rating display, and a measurable result badge (e.g., '300% Revenue Growth'). Cards use glassmorphism styling with smooth slide transitions.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Embla Carousel with auto-scroll",
-          "Client photo placeholder (colored avatar)",
-          "Quote",
-          "Name, Company, Role",
-          "Star rating (5 stars)",
-          "Measurable result badge (e.g., '300% Revenue Growth')",
-          "Glassmorphism cards"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Headline 'What Our Clients Say' is displayed",
-        "Embla Carousel renders with auto-scroll enabled",
-        "At least 4 testimonial cards are present",
-        "Each card shows avatar, quote, name, role, 5 stars, and a result badge",
-        "Glassmorphism styling applied to each card",
-        "Smooth slide transitions between testimonials"
-      ]
-    },
-    {
-      "id": "REQ-10",
-      "text": "Build a Process section with headline 'How We Work'. Render a horizontal scrolling timeline on desktop and a vertical layout on mobile with five steps: Discover → Design → Develop → Launch → Scale. Each step has a step number, icon, title, and description. Include an animated connecting line between steps that progressively fills as the user scrolls down the page, triggered by Framer Motion scroll progress.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Horizontal scroll-triggered timeline (desktop) / vertical (mobile)",
-          "Discover → Design → Develop → Launch → Scale",
-          "Each step: number, icon, title, description",
-          "Animated connecting line that fills as you scroll",
-          "Framer Motion scroll-triggered entrance"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Headline 'How We Work' is displayed",
-        "Five steps render with correct labels and descriptions",
-        "Layout is horizontal on desktop and vertical on mobile",
-        "Connecting line between steps animates fill on scroll",
-        "Each step entrance is triggered by Framer Motion whileInView"
-      ]
-    },
-    {
-      "id": "REQ-11",
-      "text": "Build a CTA section with headline 'Let's Build Your Next Big Digital Product' and subtext 'Partner with NexNam to transform your vision into a high-performance digital reality.' The left side must contain a contact form (Name, Email, Project Type dropdown, Message textarea) built with React Hook Form including validation and a success feedback state after submission. The right side must show a 'Book a Strategy Call' button and a bullet list of benefits. Apply a bold linear gradient background (primary→secondary direction).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Contact form (Name, Email, Project Type dropdown, Message) using React Hook Form",
-          "'Book a Strategy Call' button + bullet benefits",
-          "Bold gradient background",
-          "Form submission feedback"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Headline and subtext render with correct copy",
-        "Contact form has Name, Email, Project Type dropdown, and Message fields",
-        "React Hook Form handles validation; required fields show errors when empty",
-        "Successful form submission shows a visual success state",
-        "'Book a Strategy Call' button and benefits bullet list are on the right",
-        "Section has a bold gradient background using primary and secondary colors"
-      ]
-    },
-    {
-      "id": "REQ-12",
-      "text": "Build a dark minimal footer with: NexNam logo + tagline, navigation links (Services, Work, About, Contact), social icons for Twitter, LinkedIn, GitHub, and Dribbble (with placeholder hrefs), email 'hello@nexnam.io', copyright line '© 2025 NexNam. All rights reserved.', and a top border gradient line using the primary-to-secondary gradient.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Dark minimal footer",
-          "Logo + tagline",
-          "Social icons: Twitter, LinkedIn, GitHub, Dribbble (placeholder hrefs)",
-          "'hello@nexnam.io' + '© 2025 NexNam. All rights reserved.'",
-          "Top border gradient line"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Footer renders at the bottom of the page with dark background",
-        "NexNam logo with tagline is displayed",
-        "Navigation links are present",
-        "Four social icon links are present with placeholder hrefs",
-        "Email and copyright text render correctly",
-        "Top border of footer is a visible gradient line from #6C63FF to #00D4FF"
-      ]
-    },
-    {
-      "id": "REQ-13",
-      "text": "Implement performance and responsiveness optimizations across the entire SPA: lazy load all sections below the hero fold using React.lazy/Suspense, ensure all layouts are mobile-first with sm/md/lg/xl Tailwind breakpoints, limit Three.js canvas usage exclusively to the hero section, and apply Framer Motion useInView / whileInView for all scroll-triggered animations throughout the page.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Performance: lazy load below-fold sections",
-          "Responsive: mobile-first, breakpoints sm/md/lg/xl",
-          "Three.js canvas only in hero to avoid performance issues",
-          "Use framer-motion useInView and whileInView for scroll-triggered animations"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Below-fold sections are wrapped in React.lazy + Suspense",
-        "All sections are responsive across mobile, tablet, and desktop breakpoints",
-        "Three.js canvas only renders inside the hero section component",
-        "Scroll-triggered animations use Framer Motion whileInView throughout"
+        "TeamSection displays founder info (name, title, bio, photo) fetched from the backend.",
+        "PortfolioSection displays projects fetched from the backend.",
+        "ServicesSection displays services fetched from the backend.",
+        "Contact form submissions in CTASection are stored via a backend call.",
+        "Loading states are shown while data is being fetched."
       ]
     }
   ],
   "constraints": [
-    "Three.js/React Three Fiber canvas must only be used in the hero section",
-    "No backend logic required — this is a purely frontend SPA",
-    "Design tokens (colors, spacing) must be defined as CSS custom properties and Tailwind config extensions",
-    "All sections must have id attributes matching navbar anchor links",
-    "Do not use blue & purple as the sole color scheme — follow the specified #6C63FF / #00D4FF / #FF6B6B palette"
+    "All backend logic must remain in a single Motoko actor in backend/main.mo.",
+    "Do not edit files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "Admin authentication must use the hardcoded credentials (username: admin, password: Nikhil@123).",
+    "Admin panel must be a route (/admin) within the existing SPA, not a separate deployment."
   ],
   "nonGoals": [
-    "No backend canister or Motoko logic needed",
-    "No Internet Identity or authentication",
-    "No real form submission endpoint — form feedback is UI-only",
-    "No real case study detail pages — 'Explore Case Study' buttons are placeholder CTAs",
-    "No real social media API integrations",
-    "No real LinkedIn profile links"
+    "Internet Identity or wallet-based authentication for the admin panel.",
+    "Role-based access control or multiple admin users.",
+    "File/image binary upload to the backend — photo management uses URLs only.",
+    "Supabase, Firebase, or any external database integration.",
+    "Real-time updates or WebSocket notifications."
   ],
   "imageRequirements": {
-    "required": [
-      "Abstract futuristic dark hero background texture with subtle electric violet and cyan light streaks on near-black (#050510) canvas (hero-bg.dim_1920x1080.png)",
-      "Gradient avatar portrait placeholder for Alex Morgan with initials 'AM' on violet-to-cyan radial gradient circle (avatar-alex.dim_200x200.png)",
-      "Gradient avatar portrait placeholder for Sarah Chen with initials 'SC' on cyan-to-violet radial gradient circle (avatar-sarah.dim_200x200.png)",
-      "NexNam logo mark — stylized 'N' letterform with electric violet to cyan gradient on transparent background (nexnam-logo.dim_120x120.png)"
-    ],
+    "required": [],
     "edits": []
   }
 }
