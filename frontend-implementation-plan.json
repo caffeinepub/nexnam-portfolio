@@ -1,0 +1,320 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "NexNam — Futuristic Animated 3D Portfolio Website",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Configure global design system with dark theme, custom color tokens, typography, and smooth scroll behavior",
+      "acceptanceCriteria": [
+        "Tailwind config includes custom color tokens matching the design system palette",
+        "CSS custom properties defined for all brand colors",
+        "Space Grotesk applied to all headings, Inter to body text",
+        "smooth scroll-behavior enabled globally",
+        "All sections have matching id attributes (about, services, work, team, process, contact)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind config with custom color tokens (background: #050510, primary: #6C63FF, secondary: #00D4FF, accent: #FF6B6B, text: #FFFFFF/#B0B8D0), enable dark mode, and configure font families (Space Grotesk for headings, Inter for body)"
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Define CSS custom properties for all brand colors, apply smooth scroll-behavior globally, import Space Grotesk and Inter fonts, and set base typography styles"
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Build fixed glassmorphism navbar with logo, anchor navigation, CTA button, and mobile menu",
+      "acceptanceCriteria": [
+        "Navbar is fixed at top and visible across all scroll positions",
+        "NexNam logo text renders with gradient from #6C63FF to #00D4FF",
+        "All nav links scroll smoothly to their respective sections",
+        "'Start Project' button has a visible violet glow box-shadow",
+        "Hamburger icon appears on mobile and toggles a mobile nav menu",
+        "Navbar has backdrop-blur glassmorphism styling"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "create",
+          "description": "Create fixed position navbar component with glassmorphism styling (backdrop-blur, semi-transparent background), gradient text NexNam logo, anchor links for About/Services/Work/Team/Process/Contact, 'Start Project' CTA button with violet glow, and mobile hamburger menu with state management"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render Navbar component at the top level of the application layout"
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Build full-viewport hero section with animated 3D Three.js background, headline, CTAs, and scroll indicator",
+      "acceptanceCriteria": [
+        "Section fills 100vh",
+        "Headline and subheadline render with correct copy",
+        "Both CTA buttons are present — one filled with gradient, one outlined",
+        "Three.js canvas renders an animated rotating wireframe icosahedron with floating particles",
+        "Text elements animate in with staggered Framer Motion transitions",
+        "Scroll indicator arrow is visible at the bottom of the section"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/HeroSection.tsx",
+          "operation": "create",
+          "description": "Create full-viewport hero section with headline 'We Build Future-Ready Web Applications', subheadline 'Empowering startups with scalable, AI-driven digital products.', two CTA buttons ('Start Your Project' filled gradient + 'View Our Work' outlined), scroll indicator arrow, and Framer Motion staggered entrance animations for text. Integrate the generated hero background image at frontend/public/assets/generated/hero-bg.dim_1920x1080.png as a static background layer"
+        },
+        {
+          "path": "frontend/src/components/Hero3DBackground.tsx",
+          "operation": "create",
+          "description": "Create React Three Fiber canvas component with animated wireframe icosahedron sphere (slow rotation) and floating particle field. Ensure canvas is positioned absolutely behind hero content and optimized for performance"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render HeroSection component in the main application layout"
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Build About section with company story, animated stats counters, Mission/Vision/Values cards, and growth timeline",
+      "acceptanceCriteria": [
+        "Left column has story text; right column has 4 stat counters that animate on scroll",
+        "Three glassmorphism cards render for Mission, Vision, Core Values",
+        "Timeline shows 4 milestones from 2022 to 2025",
+        "Timeline and stat animations trigger when the section scrolls into view"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/AboutSection.tsx",
+          "operation": "create",
+          "description": "Create About section with id='about', two-column layout (story text left, animated stat counters right: 50+ projects, 30+ clients, 3+ years, 100% satisfaction), three glassmorphism cards for Mission/Vision/Core Values, and horizontal animated timeline showing 2022→2023→2024→2025 milestones. Use Framer Motion whileInView for scroll-triggered stat counter animations and timeline reveals"
+        },
+        {
+          "path": "frontend/src/hooks/useCountUp.ts",
+          "operation": "create",
+          "description": "Create custom hook that accepts a target number and returns current animated count value, triggering count-up animation when element enters viewport using Framer Motion useInView"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render AboutSection component in the main application layout below hero"
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Build Services section with five 3D tilt cards using react-parallax-tilt",
+      "acceptanceCriteria": [
+        "Headline 'What We Build' is displayed",
+        "Five service cards render with correct titles and descriptions",
+        "Cards tilt on mouse hover via react-parallax-tilt",
+        "Each card has glassmorphism background and a gradient border visible on hover",
+        "Glow effect activates on hover"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ServicesSection.tsx",
+          "operation": "create",
+          "description": "Create Services section with id='services', headline 'What We Build', and five service cards: (1) Custom Web Application Development, (2) SaaS Product Development, (3) UI/UX Design, (4) AI Integration, (5) Performance & Optimization. Each card uses react-parallax-tilt for 3D tilt effect, glassmorphism styling, gradient border on hover, glow effect, and includes icon/emoji, title, and description"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render ServicesSection component in the main application layout"
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Build Portfolio section with project case study cards featuring CSS 3D device mockups",
+      "acceptanceCriteria": [
+        "Section headline 'Our Work' is displayed",
+        "Four project cards render with correct project names and tags",
+        "Each card includes a CSS device mockup frame",
+        "Problem/Solution/Result brief text is present on each card",
+        "Hover state applies lift transform and glow box-shadow",
+        "'Explore Case Study' button is present on each card"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/PortfolioSection.tsx",
+          "operation": "create",
+          "description": "Create Portfolio section with id='work', headline 'Our Work', and 3-4 project cards for: FinTech Dashboard, AI SaaS Platform, E-commerce Web App, Healthcare Portal. Each card includes CSS 3D laptop device mockup with screenshot placeholder area, project name, technology tags, Problem/Solution/Result summary, hover lift + glow effect, and 'Explore Case Study' CTA button"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render PortfolioSection component in the main application layout"
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Build Founder & Co-Founder section with premium layout, gradient avatars, and vision quote",
+      "acceptanceCriteria": [
+        "Two team cards render side by side (stacked on mobile)",
+        "Each card shows gradient avatar circle with initials, name, title, and bio",
+        "LinkedIn icon is present as a placeholder anchor on each card",
+        "Italic vision quote with decorative quotation marks is displayed",
+        "Radial gradient glow is visible behind the cards"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/TeamSection.tsx",
+          "operation": "create",
+          "description": "Create Founder section with id='team', centered layout with two side-by-side cards (responsive stack on mobile): (1) Alex Morgan — CEO & Founder, (2) Sarah Chen — CTO & Co-Founder. Use generated avatar images at frontend/public/assets/generated/avatar-alex.dim_200x200.png and frontend/public/assets/generated/avatar-sarah.dim_200x200.png as gradient circle avatars. Include name, role, bio, LinkedIn icon placeholder, centered italic vision quote with stylized quotation marks, and radial gradient glow background layer behind cards"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render TeamSection component in the main application layout"
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Build Technology Stack section with animated floating tech badges and grid background",
+      "acceptanceCriteria": [
+        "Headline 'Powered By Modern Technology' is displayed",
+        "All 15 listed technologies appear as styled badges or icon tiles",
+        "Each badge has a continuous floating up-down CSS animation",
+        "Staggered animation delays create a wave-like floating effect",
+        "Section background has a visible subtle grid line pattern"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/TechnologySection.tsx",
+          "operation": "create",
+          "description": "Create Technology Stack section with headline 'Powered By Modern Technology', animated floating grid of 15 technology badges (React, Next.js, Node.js, TypeScript, PostgreSQL, MongoDB, AWS, Docker, OpenAI, Stripe, Tailwind, GraphQL, Redis, Kubernetes, Webflow) with CSS up-down float animations and staggered delays, and subtle grid-lines background pattern"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render TechnologySection component in the main application layout"
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Build Testimonials section with Embla Carousel and glassmorphism testimonial cards",
+      "acceptanceCriteria": [
+        "Headline 'What Our Clients Say' is displayed",
+        "Embla Carousel renders with auto-scroll enabled",
+        "At least 4 testimonial cards are present",
+        "Each card shows avatar, quote, name, role, 5 stars, and a result badge",
+        "Glassmorphism styling applied to each card",
+        "Smooth slide transitions between testimonials"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/TestimonialsSection.tsx",
+          "operation": "create",
+          "description": "Create Testimonials section with headline 'What Our Clients Say' and Embla Carousel with auto-scroll. Include 4-5 testimonial cards with glassmorphism styling, colored avatar circle placeholder, quote text, client name/company/role, 5-star rating display, measurable result badge (e.g., '300% Revenue Growth'), and smooth slide transitions"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render TestimonialsSection component in the main application layout"
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Build Process section with horizontal/vertical timeline and scroll-triggered animated connecting line",
+      "acceptanceCriteria": [
+        "Headline 'How We Work' is displayed",
+        "Five steps render with correct labels and descriptions",
+        "Layout is horizontal on desktop and vertical on mobile",
+        "Connecting line between steps animates fill on scroll",
+        "Each step entrance is triggered by Framer Motion whileInView"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ProcessSection.tsx",
+          "operation": "create",
+          "description": "Create Process section with id='process', headline 'How We Work', and five steps: Discover → Design → Develop → Launch → Scale. Implement horizontal scrolling timeline on desktop and vertical layout on mobile. Each step includes step number, icon, title, and description. Add animated connecting line that progressively fills based on scroll progress using Framer Motion scroll-triggered animations and whileInView"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render ProcessSection component in the main application layout"
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Build CTA section with contact form using React Hook Form and strategy call button",
+      "acceptanceCriteria": [
+        "Headline and subtext render with correct copy",
+        "Contact form has Name, Email, Project Type dropdown, and Message fields",
+        "React Hook Form handles validation; required fields show errors when empty",
+        "Successful form submission shows a visual success state",
+        "'Book a Strategy Call' button and benefits bullet list are on the right",
+        "Section has a bold gradient background using primary and secondary colors"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CTASection.tsx",
+          "operation": "create",
+          "description": "Create CTA section with id='contact', headline 'Let's Build Your Next Big Digital Product', subtext 'Partner with NexNam to transform your vision into a high-performance digital reality.', bold linear gradient background (primary→secondary). Left side: contact form (Name, Email, Project Type dropdown, Message textarea) built with React Hook Form including validation and success feedback state. Right side: 'Book a Strategy Call' button and benefits bullet list"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render CTASection component in the main application layout"
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Build dark minimal footer with logo, navigation, social links, and gradient top border",
+      "acceptanceCriteria": [
+        "Footer renders at the bottom of the page with dark background",
+        "NexNam logo with tagline is displayed",
+        "Navigation links are present",
+        "Four social icon links are present with placeholder hrefs",
+        "Email and copyright text render correctly",
+        "Top border of footer is a visible gradient line from #6C63FF to #00D4FF"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "create",
+          "description": "Create dark minimal footer with NexNam logo (use frontend/public/assets/generated/nexnam-logo.dim_120x120.png) + tagline, navigation links (Services, Work, About, Contact as anchor links), social icons for Twitter/LinkedIn/GitHub/Dribbble with placeholder hrefs, email 'hello@nexnam.io', copyright '© 2025 NexNam. All rights reserved.', and top border gradient line (primary→secondary)"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render Footer component at the bottom of the main application layout"
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Implement performance and responsiveness optimizations across the entire SPA",
+      "acceptanceCriteria": [
+        "Below-fold sections are wrapped in React.lazy + Suspense",
+        "All sections are responsive across mobile, tablet, and desktop breakpoints",
+        "Three.js canvas only renders inside the hero section component",
+        "Scroll-triggered animations use Framer Motion whileInView throughout"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Implement lazy loading for all below-fold sections using React.lazy and Suspense. Ensure Three.js canvas usage is limited exclusively to HeroSection component. Verify all sections use mobile-first responsive design with Tailwind breakpoints (sm/md/lg/xl) and Framer Motion whileInView for scroll-triggered animations"
+        },
+        {
+          "path": "frontend/src/components/HeroSection.tsx",
+          "operation": "modify",
+          "description": "Ensure Hero3DBackground Three.js canvas is conditionally rendered only within this component and optimized for performance (reduced particle count on mobile, proper disposal of Three.js resources)"
+        }
+      ]
+    }
+  ]
+}

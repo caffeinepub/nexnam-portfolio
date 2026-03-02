@@ -1,0 +1,114 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-03-02T18:14:00.802Z",
+  "summary": "The diff implements the majority of the requested requirements for the NexNam portfolio SPA. All 13 requirements appear to be substantially addressed. However, several specific acceptance criteria have gaps: the Services section uses a custom TiltCard implementation rather than react-parallax-tilt, Framer Motion is not used anywhere (replaced with custom IntersectionObserver hooks and CSS transitions), the Testimonials section uses manual setInterval auto-scroll rather than an Embla auto-scroll plugin, and the Process section's connecting line animation does not use Framer Motion scroll progress. Additionally, a backend/main.mo file and Internet Identity hooks were added which conflict with the no-backend constraint.",
+  "missing_requirements": [
+    {
+      "id": "REQ-5",
+      "requirement": "Cards tilt on mouse hover via react-parallax-tilt",
+      "reason": "The ServicesSection implements a custom TiltCard component with manual mouse event handlers instead of using the react-parallax-tilt library as specified.",
+      "evidence": [
+        "frontend/src/components/ServicesSection.tsx"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "Text elements animate in with staggered Framer Motion transitions",
+      "reason": "HeroSection uses custom CSS transitions with inline styles and a visibility state flag, not Framer Motion. No framer-motion import is present in the hero section.",
+      "evidence": [
+        "frontend/src/components/HeroSection.tsx"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Timeline and stat animations trigger when the section scrolls into view using Framer Motion scroll-triggered animation",
+      "reason": "AboutSection uses a custom useInView hook with IntersectionObserver and CSS transitions instead of Framer Motion whileInView.",
+      "evidence": [
+        "frontend/src/components/AboutSection.tsx",
+        "frontend/src/hooks/useInView.ts"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "requirement": "Embla Carousel renders with auto-scroll enabled using the Embla auto-scroll plugin",
+      "reason": "TestimonialsSection uses useEmblaCarousel but implements auto-scroll via a manual setInterval rather than the official embla-carousel-autoplay or autoScroll plugin.",
+      "evidence": [
+        "frontend/src/components/TestimonialsSection.tsx"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "requirement": "Connecting line between steps animates fill on scroll triggered by Framer Motion scroll progress",
+      "reason": "ProcessSection implements the animated line via a manual scroll event listener with useState, not Framer Motion's useScroll/useTransform scroll progress APIs.",
+      "evidence": [
+        "frontend/src/components/ProcessSection.tsx"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "requirement": "Scroll-triggered animations use Framer Motion whileInView throughout",
+      "reason": "All sections use a custom useInView hook with IntersectionObserver and CSS transitions rather than Framer Motion's whileInView or useInView APIs.",
+      "evidence": [
+        "frontend/src/hooks/useInView.ts",
+        "frontend/src/components/AboutSection.tsx",
+        "frontend/src/components/ServicesSection.tsx",
+        "frontend/src/components/PortfolioSection.tsx",
+        "frontend/src/components/ProcessSection.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "backend/main.mo file added with an empty Motoko actor",
+      "reason": "The build request explicitly states no backend canister or Motoko logic is needed and that this is a purely frontend SPA. Adding a backend file was not requested.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "useActor.ts and useInternetIdentity.ts hooks included with full Internet Identity and AuthClient integration logic",
+      "reason": "The build request explicitly states no Internet Identity or authentication is needed. These hooks implement full II authentication infrastructure that was not requested.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts",
+        "frontend/src/hooks/useInternetIdentity.ts"
+      ]
+    },
+    {
+      "description": "Caffeine.ai referral link added in Footer",
+      "reason": "No such external referral link was mentioned in the build request. The footer spec only calls for NexNam logo, tagline, nav links, social icons, email, and copyright text.",
+      "evidence": [
+        "frontend/src/components/Footer.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.78,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/AboutSection.tsx",
+    "frontend/src/components/CTASection.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Hero3DBackground.tsx",
+    "frontend/src/components/HeroSection.tsx",
+    "frontend/src/components/Navbar.tsx",
+    "frontend/src/components/PortfolioSection.tsx",
+    "frontend/src/components/ProcessSection.tsx",
+    "frontend/src/components/ServicesSection.tsx",
+    "frontend/src/components/TeamSection.tsx",
+    "frontend/src/components/TechnologySection.tsx",
+    "frontend/src/components/TestimonialsSection.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useCountUp.ts",
+    "frontend/src/hooks/useInView.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}
